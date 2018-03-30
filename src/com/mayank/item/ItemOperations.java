@@ -19,19 +19,21 @@ public class ItemOperations {
 			return itemOperations;
 		}
 	}
-	public  ArrayList<ItemDTO> getItemList() {
-		System.out.println(itemList);
-		return itemList;
-	}
-	public void setItemList() throws ClassNotFoundException, SQLException {
+	public  ArrayList<ItemDTO> getItemList() throws ClassNotFoundException, SQLException  {
 		ItemDAO itemDAO = new ItemDAO();
 		this.itemList =  itemDAO.view();
+		return itemList;
 	}
 	
-			public boolean isFlag(Integer batchNo) {
+//	public void setItemList() throws ClassNotFoundException, SQLException {
+//		ItemDAO itemDAO = new ItemDAO();
+//		this.itemList =  itemDAO.view();
+//	}
+	
+			public boolean isFlag(Integer batchNo) throws ClassNotFoundException, SQLException {
 				for(ItemDTO itemDTO : getItemList()) {
 					if(itemDTO.getBatchNo().equals(batchNo)) {
-						if(itemDTO.getStatus() == "Y") {
+						if(itemDTO.getStatus().equals("Y")) {
 							return true;
 						}
 				}

@@ -23,12 +23,18 @@ public class ItemController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		ArrayList<ItemDTO> itemList = ItemOperations.getInstance().getItemList();
-		System.out.println(itemList);
-		request.setAttribute("itemList", itemList);
-		RequestDispatcher rd = request.getRequestDispatcher("item-list.jsp");
-		rd.forward(request, response);
-	
+		try {
+			ArrayList<ItemDTO> itemList = ItemOperations.getInstance().getItemList();
+			request.setAttribute("itemList", itemList);
+			RequestDispatcher rd = request.getRequestDispatcher("item-list.jsp");
+			rd.forward(request, response);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -47,13 +53,17 @@ public class ItemController extends HttpServlet {
 			try {
 				
 					if(itemDAO.add(itemDTO)) {
-						ArrayList<ItemDTO> itemList = ItemOperations.getInstance().getItemList();
-						request.setAttribute("itemList", itemList);
-						RequestDispatcher rd = request.getRequestDispatcher("item-list.jsp");
-						rd.forward(request, response);
-						
+						ArrayList<ItemDTO> itemList;
+						try {
+							itemList = ItemOperations.getInstance().getItemList();
+							request.setAttribute("itemList", itemList);
+							RequestDispatcher rd = request.getRequestDispatcher("item-list.jsp");
+							rd.forward(request, response);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}	
 					}
-		
 			} 
 			catch (SQLException e) {
 				// TODO Auto-generated catch block

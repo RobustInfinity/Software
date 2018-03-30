@@ -58,6 +58,7 @@ public class ItemDAO {
 		String flag="Y";
 			if(ItemOperations.getInstance().isFlag(batchNo)) {
 				flag="N";
+//				System.out.println(ItemOperations.getInstance().getItemList().get(4).getStatus());
 			}
 		Connection connection =null;
 		PreparedStatement pstmt =null;
@@ -123,7 +124,6 @@ public class ItemDAO {
 			}
 		}
 		
-		System.out.println(itemList);
 		return itemList;
 	}
 }
